@@ -11,7 +11,6 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-// Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
 var svg = d3.select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
@@ -21,8 +20,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Import Data
-d3.csv("./assets/data/data.csv").then(function(sourceData) {
-
+d3.csv("D3_data_journalism/assets/data/data.csv").then(function(sourceData) {
 
     //Parse Data/Cast as numbers
     sourceData.forEach(function(data) {
@@ -51,7 +49,7 @@ d3.csv("./assets/data/data.csv").then(function(sourceData) {
     chartGroup.append("g")
       .call(leftAxis);
 
-    //Create Data Labels
+    //Create Circle Labels
     sourceData.forEach(d =>
         chartGroup.selectAll("text")
         .data(sourceData)
@@ -75,7 +73,6 @@ d3.csv("./assets/data/data.csv").then(function(sourceData) {
     .attr("fill", "blue")
     .attr("opacity", ".25")
 
-
     // Initialize tool tip
     var toolTip = d3.tip()
       .attr("class", "tooltip")
@@ -85,7 +82,6 @@ d3.csv("./assets/data/data.csv").then(function(sourceData) {
       });
 
     // Create tooltip in the chart
-
     chartGroup.call(toolTip);
 
     // Create event listener to display and hide the tooltip
